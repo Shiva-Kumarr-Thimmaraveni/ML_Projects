@@ -42,21 +42,21 @@ y_pred = regressor.predict(X_test)
 options = ["New York", "California", "Florida"]
 research_spend = st.number_input(
     "Enter a R&D Spend in Dollars($)",
-    min_value=50000,  # Minimum value
+    min_value=1000,  # Minimum value
     max_value=10000000,  # Maximum value (1 crore)
     value=100000,  # Default value
     step=1000  # Step size for increment/decrement
 )
 admistration_spend = st.number_input(
     "Enter a Administration Spend in Dollars($)",
-    min_value=50000,  # Minimum value
+    min_value=1000,  # Minimum value
     max_value=10000000,  # Maximum value (1 crore)
     value=100000,  # Default value
     step=1000  # Step size for increment/decrement
 )
 Marketing = st.number_input(
     "Enter a Marketing Spend in Dollars($)",
-    min_value=50000,  # Minimum value
+    min_value=1000,  # Minimum value
     max_value=10000000,  # Maximum value (1 crore)
     value=100000,  # Default value
     step=1000  # Step size for increment/decrement
@@ -70,12 +70,12 @@ if st.sidebar.button("Submit"):
     # Display the selected value when the button is clicked
     if (selected_option == 'New York'):
         y_pred = regressor.predict([[0,0,1,research_spend,admistration_spend,Marketing]])
-        st.success("Estimated Profit :", y_pred.round())
+        st.success(f'Estimated Profit for the Startup in New York is {y_pred[0].round()}')
     if (selected_option == "California"):
         y_pred = regressor.predict([[1,0,0,research_spend,admistration_spend,Marketing]])
-        st.success("Estimated Profit :", y_pred.round())
+        st.success(f'Estimated Profit for the Startup in California is {y_pred[0].round()}')
     if (selected_option == "Florida"):
         y_pred = regressor.predict([[0,1,0,research_spend,admistration_spend,Marketing]])
-        st.success("Estimated Profit :", y_pred.round())
+        st.success(f'Estimated Profit for the Startup in Florida is {y_pred[0].round()}')
     
 

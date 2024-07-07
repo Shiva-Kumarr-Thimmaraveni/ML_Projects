@@ -1,5 +1,4 @@
 # Simple Linear Regression Project 
 
-## Public URL for Testing 
+# Multiple Linear Regression Project 
 
-### https://predict-salary-by-experience-in-years.streamlit.app/

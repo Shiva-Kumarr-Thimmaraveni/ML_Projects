@@ -1,3 +1,9 @@
+.loading-gif {
+  margin-top: 1rem;
+  width: 50px;
+  height: 50px;
+}
+
 .App {
   text-align: center;
 }
@@ -13,16 +19,7 @@
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
+
 
 .App-link {
   color: #61dafb;
@@ -34,5 +31,147 @@
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+input {
+  padding: 0.5rem;
+  font-size: 1rem;
+  margin: 0.5rem 0;
+}
+
+button {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  background-color: #61dafb;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #21a1f1;
+}
+.inputBox{
+  width: fit-content;
+  border-radius: 0.4rem;
+  border: none;
+  padding: 0.5rem;
+  font-size: 1rem;
+  min-height: 5rem;
+  min-width: 20rem;
+  font-family: Arial, sans-serif;
+  font-weight: 100;
+  color: black;
+  resize: none;
+  overflow-y: auto;
+}
+
+
+table {
+  margin-top: 1rem;
+  border-collapse: collapse;
+  width: 80%;
+  background-color: #fff;
+  color: #000;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+thead {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+
+tbody {
+  display: block;
+  max-height: 200px; /* Adjust this height to fit 5 rows, including header height */
+  overflow-y: auto;
+  width: auto;
+}
+
+
+th, td {
+  display: table-cell;
+  width: calc(100% / 3); /* Assuming there are 3 columns */
+  font-size: medium;
+  font-weight: 200;
+  cursor: pointer;
+}
+
+th {
+  background-color: #4CAF50;
+  color: white;
+  font-weight: bold;
+}
+
+tr:hover {
+  background-color: #f1f1f1;
+  
+}
+tr{
+   display: flex;
+    justify-content: center;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+@media (max-width: 600px) {
+  table, thead, tbody, th, td, tr {
+    display: block;
+    width: 100%;
+  }
+
+  tr {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+  }
+
+  th {
+    display: none;
+  }
+
+  td {
+    padding: 0.5rem;
+    border-bottom: none;
+    position: relative;
+    padding-left: 50%;
+    text-align: right;
+  }
+
+  td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 0;
+    width: 50%;
+    padding-left: 1rem;
+    font-weight: bold;
+    text-align: left;
   }
 }

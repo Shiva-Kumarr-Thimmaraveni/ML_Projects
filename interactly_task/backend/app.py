@@ -3,7 +3,6 @@ import faiss
 import numpy as np
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-from transformers import AutoTokenizer, AutoModelForSequenceClassification
 from sentence_transformers import SentenceTransformer
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
@@ -21,17 +20,17 @@ def hello_world():
 
 
 
-
+"""
+Preprocesses text for better embedding generation.
+"""
 def preprocess_text(text):
-    """
-    Preprocesses text for better embedding generation (add more techniques as needed).
-    """
     text = text.lower()
-    # Add other preprocessing steps like removing stop words, stemming, etc.
     return text
 
 
-# Load your dataset
+"""
+Loading Data Set as a Data Frame using Pandas Library
+"""
 df = pd.read_excel("RecruterPilot candidate sample input dataset.xlsx")
 
 # Preprocess text
@@ -43,7 +42,7 @@ vectorizer = TfidfVectorizer()
 tfidf_matrix = vectorizer.fit_transform(df['combined_text'])
 
 # Choose a Sentence Transformer model
-model_name = 'all-MiniLM-L6-v2'  # Replace with your desired model
+model_name = 'all-MiniLM-L6-v2'
 sentence_model = SentenceTransformer(model_name)
 
 # Generate embeddings for candidate data
@@ -87,14 +86,6 @@ def find_matches(job_description):
     # Rank candidates based on similarity scores
     top_candidates = top_candidates.sort_values(by='similarity', ascending=False)
 
-     # Output formatted results
-    print("Here are the shortlisted Top 5 Candidates list:")
-    for index, candidate in top_candidates.iterrows():
-        print(f"Name: {candidate['Name']}")
-        print(f"Skills: {candidate['Job Skills']}")
-        print(f"Experience: {candidate['Experience']}")
-        print("\n")
-
     return top_candidates
 
 
@@ -113,6 +104,7 @@ def get_data():
         matchedDict['Name'] = candidate['Name']
         matchedDict['Job_Skills'] = candidate['Job Skills']
         matchedDict['Experience'] = candidate['Experience']
+        matchedDict['similarity_Score'] = str(round(int(candidate['similarity'] *100)))+"%"
         finalList.append(matchedDict)
         matchedDict = {}
     print('//////////////matcheDict////////////')

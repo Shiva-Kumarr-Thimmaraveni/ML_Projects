@@ -2,6 +2,7 @@ import pandas as pd
 import faiss
 import numpy as np
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 from sentence_transformers import SentenceTransformer
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -9,12 +10,16 @@ from sklearn.metrics.pairwise import cosine_similarity
 
 app = Flask(__name__) 
 
+CORS(app)
+
 @app.route('/')
 def hello_world():
     data = {
         'message':'hello from flask!!'
     }
     return jsonify(data)
+
+
 
 
 def preprocess_text(text):
@@ -97,17 +102,25 @@ def find_matches(job_description):
 # jd = "Data Scientist with 3+ years experience in Python"
 # find_matches(jd)
 
-@app.route('/match_candidates', methods=['POST'])
-def match_candidates():
+@app.route('/getData', methods=['POST'])
+def get_data():
     data = request.get_json()
-    job_description = data.get('job_description')
-    if not job_description:
-        return jsonify({'error': 'Job description is required'}), 400
-
-    matches = find_matches(job_description)
-    return jsonify(matches)
+    prompt = data.get('prompt', '')
+    matches = find_matches(prompt)
+    matchedDict = {}
+    finalList = []
+    for index, candidate in matches.iterrows():
+        matchedDict['Name'] = candidate['Name']
+        matchedDict['Job_Skills'] = candidate['Job Skills']
+        matchedDict['Experience'] = candidate['Experience']
+        finalList.append(matchedDict)
+        matchedDict = {}
+    print('//////////////matcheDict////////////')
+    print(finalList)
+    print('/////////////////////////////////')
+    return jsonify({'dataframe': finalList})
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0',debug=True)
 
 

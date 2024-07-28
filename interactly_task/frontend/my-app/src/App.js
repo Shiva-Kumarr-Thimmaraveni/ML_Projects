@@ -1,49 +1,25 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import react, {useEffect, useState} from 'react'
+function App(){
+  const [data, setData] = useState({})
+  useEffect(()=> {
+    fetchData()
+  },[])
 
-function App() {
-  const [query, setQuery] = useState('');
-  const [matches, setMatches] = useState([]);
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-
-    try {
-      const response = await axios.post('http://localhost:5000/match_candidates', { job_description: query });
-      setMatches(response.data);
-    } catch (error) {
-      console.error(error);
-      // Handle error
+  const fetchData = async ()=>{
+    try{
+      const res = await fetch('https://laughing-carnival-r4469x69566xcxvpj-5000.app.github.dev/')
+      const jsonData = await  res.json()
+      setData(jsonData)
+    }catch(error){
+      console.log('error',error)
     }
-  };
-
-  return (
-    <div className="App">
-      <h1>Candidate Matching System</h1>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="query">Enter job description:</label>
-        <textarea id="query" value={query} onChange={(e) => setQuery(e.target.value)} />
-        <button type="submit">Submit</button>
-      </form>
-      {matches.length > 0 && (
-        <div>
-          <h2>Top Matches</h2>
-          <ul>
-            {matches.map((match, index) => (
-              <li key={index}>
-                <strong>Candidate {index + 1}:</strong>
-                {/* <p>Name: {match.Name}</p>
-                <p>Skills: {match.Job Skills}</p>
-                <p>Experience: {match.Experience}</p>
-                <p>Similarity: {match.similarity}</p> */}
-                <p>{match}</p>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
+  }
+  return(
+    <div className='App'>
+      <h1>front end</h1>
+      <h2>{data.message}</h2>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

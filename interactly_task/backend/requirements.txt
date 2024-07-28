@@ -8,3 +8,4 @@ scikit-learn
 openpyxl
 flask
 axios
+flask_cors

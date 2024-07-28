@@ -11,7 +11,10 @@ app = Flask(__name__)
 
 @app.route('/')
 def hello_world():
-    return 'Hello, World!'
+    data = {
+        'message':'hello from flask!!'
+    }
+    return jsonify(data)
 
 
 def preprocess_text(text):

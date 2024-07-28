@@ -77,29 +77,3 @@ function App() {
 }
 
 export default App
-
-// import react, {useEffect, useState} from 'react'
-// function App(){
-//   const [data, setData] = useState({})
-//   useEffect(()=> {
-//     fetchData()
-//   },[])
-
-//   const fetchData = async ()=>{
-//     try{
-//       const res = await fetch('http://127.0.0.1:5000/')
-//       const jsonData = await  res.json()
-//       setData(jsonData)
-//     }catch(error){
-//       console.log('error',error)
-//     }
-//   }
-//   return(
-//     <div className='App'>
-//       <h1>front end</h1>
-//       <h2>{data.message}</h2>
-//     </div>
-//   )
-// }
-
-// export default App
